@@ -20,6 +20,7 @@
 -- 	season_stats season_stats[],
 -- 	scoring_class scoring_class,
 -- 	years_since_last_season INTEGER,
+--      is_active BOOLEAN,
 -- 	current_season INTEGER,
 -- 	PRIMARY KEY(player_name, current_season)
 -- )
@@ -77,7 +78,7 @@ SELECT
 		WHEN t.season IS NOT NULL THEN 0
 		ELSE y.years_since_last_season + 1
 	END AS years_since_last_season,
-	
+	t.season IS NOT NULL AS is_active,
 	COALESCE(t.season, y.current_season + 1) AS current_season
 
 FROM today t 
